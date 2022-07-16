@@ -25,7 +25,7 @@ def get_button(
     padding_y: int = Query(30, alias="py"),
     border_radius: int = Query(5, alias="br"),
 ):
-    font = ImageFont.truetype("Arial.ttf", font_size)
+    font = ImageFont.truetype("LiberationSans-Regular.ttf", font_size)
     width, height = font.getsize(text)
     width += padding_x
     height += padding_y
