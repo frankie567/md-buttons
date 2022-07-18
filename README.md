@@ -4,7 +4,7 @@ Add nice SVG buttons to your Markdown files 🎨
 
 <p align="center">
     <a href="#how-does-it-work">
-        <img src="https://md-buttons.onrender.com/button.svg?text=Awesome%20🚀%20Tell%20me%20more!&w=200&px=30&py=30" alt="Awesome! Tell me more!">
+        <img src="https://md-buttons.onrender.com/button.svg?text=Awesome%20%F0%9F%9A%80%20Tell%20me%20more!&w=250&px=40&py=40" alt="Awesome! Tell me more!">
     </a>
 </p>
 
