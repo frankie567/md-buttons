@@ -38,7 +38,6 @@ def get_button(
     border_radius: int = Query(5, ge=0, alias="br"),
 ):
     font_size, height = guess_font_size(width, padding_x, text)
-    width += padding_x
     height += padding_y
 
     return templates.TemplateResponse(
