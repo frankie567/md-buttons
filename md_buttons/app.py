@@ -30,11 +30,11 @@ def guess_font_size(width: int, padding_x: int, text: str) -> Tuple[int, int]:
 def get_button(
     request: Request,
     text: str = Query(),
-    width: int = Query(200, ge=0, alias="w"),
+    width: int = Query(100, ge=0, alias="w"),
     background_color: Color = Query(Color("#2ecc71"), alias="bg"),
     foreground_color: Color = Query(Color("#ffffff"), alias="fg"),
     padding_x: int = Query(20, ge=0, alias="px"),
-    padding_y: int = Query(30, ge=0, alias="py"),
+    padding_y: int = Query(20, ge=0, alias="py"),
     border_radius: int = Query(5, ge=0, alias="br"),
 ):
     font_size, height = guess_font_size(width, padding_x, text)
