@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Optional, Tuple
 from fastapi import FastAPI, Query, Request, Response
 from fastapi.templating import Jinja2Templates
 from pydantic.color import Color
@@ -15,11 +15,16 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
 
+def get_text_size(text: str, font_size: int) -> Tuple[int, int]:
+    font = ImageFont.truetype(settings.font, font_size)
+    text_width, text_height = font.getsize(text)
+    return text_width, text_height
+
+
 def guess_font_size(width: int, padding_x: int, text: str) -> Tuple[int, int]:
     font_size = 1
     while True:
-        font = ImageFont.truetype(settings.font, font_size)
-        text_width, text_height = font.getsize(text)
+        text_width, text_height = get_text_size(text, font_size)
         if text_width + padding_x > width:
             break
         font_size += 1
@@ -36,8 +41,13 @@ def get_button(
     padding_x: int = Query(20, ge=0, alias="px"),
     padding_y: int = Query(20, ge=0, alias="py"),
     border_radius: int = Query(5, ge=0, alias="br"),
+    font_size: Optional[int] = Query(None, ge=0, alias="fs"),
 ):
-    font_size, height = guess_font_size(width, padding_x, text)
+    if font_size is None:
+        font_size, height = guess_font_size(width, padding_x, text)
+    else:
+        _, height = get_text_size(text, font_size)
+
     height += padding_y
 
     return templates.TemplateResponse(
@@ -53,5 +63,7 @@ def get_button(
             "foreground_color": foreground_color,
         },
         media_type="image/svg+xml",
-        headers={"Cache-Control": f"public, max-age={settings.http_cache_ttl}, immutable"},
+        headers={
+            "Cache-Control": f"public, max-age={settings.http_cache_ttl}, immutable"
+        },
     )
