@@ -34,9 +34,17 @@ Add nice SVG buttons to your Markdown files 🎨
 
 ![](https://md-btn.deta.dev/button.svg?text=Hello%20World&w=300)
 
+### Height (`h`)
+
+```md
+![](https://md-btn.deta.dev/button.svg?text=Hello%20World&h=100)
+```
+
+![](https://md-btn.deta.dev/button.svg?text=Hello%20World&h=100)
+
 ### Font size (`fs`)
 
-By default, the font size will be automatically guessed so that the text fits within the desired width. You can however force a specific size, but in this case the text may overflow the background.
+By default, the font size will be automatically guessed so that the text fits within the desired width and height. You can however force a specific size, but in this case the text may overflow the button.
 
 ```md
 ![](https://md-btn.deta.dev/button.svg?text=Hello%20World&fs=48)
