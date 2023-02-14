@@ -1,17 +1,12 @@
 from typing import Optional, Tuple
 
 from asgi_prometheus import PrometheusMiddleware
-from fastapi import FastAPI, Query, Request, Response
+from fastapi import FastAPI, Query, Request
 from fastapi.templating import Jinja2Templates
 from PIL import ImageFont
 from pydantic.color import Color
 
 from md_buttons.settings import settings
-
-
-class SVGImageResponse(Response):
-    media_type = "image/svg+xml"
-
 
 app = FastAPI()
 app.add_middleware(
@@ -38,7 +33,7 @@ def guess_font_size(
     return font_size
 
 
-@app.get("/button.svg", response_class=SVGImageResponse)
+@app.get("/button.svg")
 def get_button(
     request: Request,
     text: str = Query(),
