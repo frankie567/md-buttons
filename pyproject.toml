@@ -1,2 +1,2 @@
-[tool.isort]
-profile = "black"
+[tool.ruff]
+extend-select = ["I"]

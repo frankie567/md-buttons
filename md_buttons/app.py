@@ -1,8 +1,10 @@
 from typing import Optional, Tuple
+
+from asgi_prometheus import PrometheusMiddleware
 from fastapi import FastAPI, Query, Request, Response
 from fastapi.templating import Jinja2Templates
-from pydantic.color import Color
 from PIL import ImageFont
+from pydantic.color import Color
 
 from md_buttons.settings import settings
 
@@ -12,6 +14,9 @@ class SVGImageResponse(Response):
 
 
 app = FastAPI()
+app.add_middleware(
+    PrometheusMiddleware, metrics_url="/metrics", group_paths=["/button.svg"]
+)
 templates = Jinja2Templates(directory="templates")
 
 
@@ -21,7 +26,9 @@ def get_text_size(text: str, font_size: int) -> Tuple[int, int]:
     return text_width, text_height
 
 
-def guess_font_size(width: int, padding_x: int, height: int, padding_y: int, text: str) -> int:
+def guess_font_size(
+    width: int, padding_x: int, height: int, padding_y: int, text: str
+) -> int:
     font_size = 1
     while True:
         text_width, text_height = get_text_size(text, font_size)
