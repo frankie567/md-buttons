@@ -1,6 +1,5 @@
 from typing import Optional, Tuple
 
-from asgi_prometheus import PrometheusMiddleware
 from fastapi import FastAPI, Query, Request
 from fastapi.templating import Jinja2Templates
 from PIL import ImageFont
@@ -9,9 +8,6 @@ from pydantic.color import Color
 from md_buttons.settings import settings
 
 app = FastAPI()
-app.add_middleware(
-    PrometheusMiddleware, metrics_url="/metrics", group_paths=["/button.svg"]
-)
 templates = Jinja2Templates(directory="templates")
 
 
